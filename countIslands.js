@@ -1,7 +1,4 @@
-
-
 function countIslands (mapStr) {
-  console.log(mapStr);
 
   // find the x size
   let xSize = mapStr.split('\n')[0].length;
@@ -18,25 +15,31 @@ function countIslands (mapStr) {
     }
   }
 
-  console.log(matrix);
 
-  let cnt = 0;
-  for(let y=0; y<ySize; y++)
-    for(let x=0; x<xSize; x++)
-      count(x, y, '0');
+  let islandCount = 0;
+  for(let y=0; y<ySize; y++) {
+    for(let x=0; x<xSize; x++) {
+      if(matrix[y][x] === '0') {
+        islandCount++;
+        sinkIsland(x, y);
+      }
+//       console.log(x, y, matrix);
+    }
+  }
 
-  console.log(matrix);
+  return islandCount;
 
-  function count(x, y, color) {
-    if(matrix[y] && matrix[y][x]) {
-      if(matrix[y][x] !== color || matrix[y][x] === 'X')
-        return;
 
-      matrix[y][x] = 'X';
-      count(x, y+1, color);
-      count(x, y-1, color);
-      count(x-1, y, color);
-      count(x+1, y, color);
+  function sinkIsland(x, y) {
+    if (x<0 || x>=xSize || y<0 || y>=ySize) 
+      return;
+
+    if (matrix[y][x] === '0') {
+      matrix[y][x] = '.';
+      sinkIsland(x  , y-1);
+      sinkIsland(x+1, y);
+      sinkIsland(x  , y+1);
+      sinkIsland(x-1, y);
     }
   }
   
@@ -45,10 +48,8 @@ function countIslands (mapStr) {
 
 
 // start x=0, y=0
-
 // if (x,y)==0, flood fill
-
-// flood fill & mark islands
+//    flood fill & mark islands
 
 
 // Flood-fill (node, target-color, replacement-color):
