@@ -1,9 +1,7 @@
 function countIslands (mapStr) {
 
-  // find the x size
+  // find the x & y size
   let xSize = mapStr.split('\n')[0].length;
-
-  //find the y size
   let ySize = mapStr.split('\n').length;
 
   // copy the string into a matrix
@@ -15,7 +13,6 @@ function countIslands (mapStr) {
     }
   }
 
-
   let islandCount = 0;
   for(let y=0; y<ySize; y++) {
     for(let x=0; x<xSize; x++) {
@@ -23,12 +20,10 @@ function countIslands (mapStr) {
         islandCount++;
         sinkIsland(x, y);
       }
-//       console.log(x, y, matrix);
     }
   }
 
   return islandCount;
-
 
   function sinkIsland(x, y) {
     if (x<0 || x>=xSize || y<0 || y>=ySize) 
@@ -45,12 +40,28 @@ function countIslands (mapStr) {
   
 }
 
-
+          //            _
+          //           /_'. _
+          //         _   \ / '-.
+          //        < ``-.;),--'`
+          //        '--.</()`--.
+          //          / |/-/`'._\
+          //          |/ |=|
+          //             |_|
+          //        ~`   |-| ~~      ~
+          //    ~~  ~~ __|=|__   ~~
+          //  ~~   .-'`  |_|  ``""-._   ~~
+          //   ~~.'      |=|    O    '-.  ~
+          //     |      `"""`  <|\      \   ~
+          //  ~  \              |\      | ~~
+          //      '-.__.--._    |/   .-'
+          //           ~~   `--...-'`    ~~
+          //   ~~         ~          ~
+          //         ~~         ~~     ~
 
 // start x=0, y=0
 // if (x,y)==0, flood fill
 //    flood fill & mark islands
-
 
 // Flood-fill (node, target-color, replacement-color):
 // 1. If target-color is equal to replacement-color, return.
@@ -61,13 +72,3 @@ function countIslands (mapStr) {
 //     Perform Flood-fill (one step to the west of node, target-color, replacement-color).
 //     Perform Flood-fill (one step to the east of node, target-color, replacement-color).
 // 5. Return.
-
-
-
-var string = ('..000.\n'+
-'..0...\n'+
-'..0.0.\n'+
-'..0...\n'+
-'..000.');
-
-console.log(countIslands(string));
